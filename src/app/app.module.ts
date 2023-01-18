@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/auth/auth.module';
+import { UserModule } from 'src/user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -9,15 +11,16 @@ import { AppService } from './app.service';
     TypeOrmModule.forRoot({
       keepConnectionAlive: true,
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT || 3306,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '#NAHeem199',
+      database: 'chat',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
     }),
-    
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
