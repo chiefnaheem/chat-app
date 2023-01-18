@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { UserModule } from 'src/user/user.module';
@@ -8,6 +9,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
+    PassportModule.register({ session: true }),
     TypeOrmModule.forRoot({
       keepConnectionAlive: true,
       type: 'mysql',
