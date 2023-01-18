@@ -1,3 +1,5 @@
+import { CreateUserParams } from "src/utils/types";
+
 export interface IUserService {
-    createUser()
+    createUser(userDetails: CreateUserParams)
 }
