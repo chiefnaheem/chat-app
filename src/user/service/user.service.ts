@@ -1,4 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { IUserService } from '../user';
 
 @Injectable()
-export class UserService {}
+export class UserService implements IUserService {
+    createUser() {
+        throw new Error('Method not implemented.');
+    }
+}
