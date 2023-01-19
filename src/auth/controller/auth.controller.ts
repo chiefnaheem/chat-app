@@ -5,7 +5,6 @@ import { Routes, Services } from 'src/utils/constants';
 import { IAuthService } from '../auth';
 import { LoginDto } from '../dto/login.dto';
 import { RegisterDto } from '../dto/register.dto';
-import { LocalAuthGuard } from '../guards/auth.guard';
 import { AuthRoute } from '../utils/types';
 
 @Controller(Routes.AUTH)
@@ -20,7 +19,6 @@ export class AuthController {
         return instanceToPlain(await this.userService.createUser(body))
     }
 
-    @UseGuards(LocalAuthGuard)
     @Post('login')
     async login(@Body() body: LoginDto) {
         // return instanceToPlain(await this.authService.login(body))
