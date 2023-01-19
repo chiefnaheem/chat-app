@@ -1,6 +1,7 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { IUserService } from 'src/user/user';
 import { Services } from 'src/utils/constants';
+import { comparePassword } from 'src/utils/helpers';
 import { LoginParams } from 'src/utils/types';
 import { IAuthService } from '../auth';
 
@@ -16,5 +17,6 @@ export class AuthService implements IAuthService {
         if(!user) {
             throw new HttpException('Invalid credentials', 404);
         }
+        const isPasswordValid = await comparePassword(loginDetails.password, user.password);
     }
 }

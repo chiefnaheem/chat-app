@@ -11,6 +11,7 @@ export type LoginParams = {
 };
 
 export type FindUserParams = Partial<{
+    id: string;
     email: string;
     firstName: string;
 }>;

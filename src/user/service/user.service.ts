@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hashPassword } from 'src/utils/helpers';
-import { CreateUserParams } from 'src/utils/types';
+import { CreateUserParams, FindUserParams } from 'src/utils/types';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { IUserService } from '../user';
@@ -11,6 +11,14 @@ export class UserService implements IUserService {
     constructor(
         @InjectRepository(User) private readonly userRepository: Repository<User>,
     ) {}
+    findUser(findUserParams: FindUserParams): Promise<User> {
+        return this.userRepository.findOne({
+            where: {
+                ...findUserParams
+            }
+        });
+
+    }
 
     async createUser(userDetails: CreateUserParams): Promise<User | null >{
         try {
@@ -35,6 +43,7 @@ export class UserService implements IUserService {
             throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
 
 
 }
