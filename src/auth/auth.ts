@@ -1,3 +1,5 @@
+import { LoginParams } from "src/utils/types";
+
 export interface IAuthService {
-    validateUser()
+    validateUser(body: LoginParams): Promise<any>;
 }
